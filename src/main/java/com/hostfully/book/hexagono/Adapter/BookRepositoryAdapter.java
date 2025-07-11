@@ -63,6 +63,7 @@ public class BookRepositoryAdapter implements BookRepository {
                 .initialDate(bookEntity.getInitialDate())
                 .finalDate(bookEntity.getFinalDate())
                 .guest(build(bookEntity.getGuest()))
+                .state(bookEntity.getState() != null ? Book.State.valueOf(bookEntity.getState()) : null)
                 .build();
     }
 
@@ -72,6 +73,9 @@ public class BookRepositoryAdapter implements BookRepository {
         bookEntity.setGuest(buildGuestEntity(book.getGuest()));
         bookEntity.setInitialDate(book.getInitialDate());
         bookEntity.setFinalDate(book.getFinalDate());
+        if (book.getState() != null) {
+            bookEntity.setState(book.getState().toString());
+        }
         return bookEntity;
     }
 
@@ -95,7 +99,8 @@ public class BookRepositoryAdapter implements BookRepository {
 
         bookEntities.stream().forEach(bookEntity -> {
             Book book = new Book(bookEntity.getId(),build(bookEntity.getGuest()),
-                    bookEntity.getInitialDate(), bookEntity.getFinalDate(),Book.State.ACTIVE);
+                    bookEntity.getInitialDate(), bookEntity.getFinalDate(),
+                    bookEntity.getState() != null ? Book.State.valueOf(bookEntity.getState()) : null);
             books.add(book);
         });
 

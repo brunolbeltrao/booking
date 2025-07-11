@@ -31,7 +31,7 @@ public class BookController {
             return new ResponseEntity<BookDTO>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity(currentBook, HttpStatus.OK);
+        return new ResponseEntity<>(BookDTO.build(currentBook), HttpStatus.OK);
     }
 
     @PutMapping("cancel/{id}")
