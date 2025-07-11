@@ -17,7 +17,7 @@ public class BookEntity implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "gest_id")
+    @JoinColumn(name = "guest_id")
     private GuestEntity guest;
     private Date initialDate;
     private Date finalDate;
